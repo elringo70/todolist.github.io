@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Todo List</title>
+  </head>
+  <body class="bg-gray-100">
+    <div class="container h-screen">
+      <div class="w-4/6 m-auto h-full">
+        <div class="grid gap-10 grid-cols-2 grid-rows-1 h-3/4">
+          <div class="bg-white shadow-lg p-5">
+            <div class="flex flex-col space-x-10">
+              <form method="post" id="form" autocomplete="off">
+                <input-element label="Tarea" name="name"></input-element>
+                <textarea-element
+                  label="Descripción"
+                  name="content"
+                ></textarea-element>
+                <button
+                  type="submit"
+                  class="rounded bg-indigo-700 px-4 py-2 text-white shadow shadow-indigo-700 hover:bg-indigo-600 w-full mt-5"
+                >
+                  Agregar
+                </button>
+              </form>
+            </div>
+          </div>
+          <div class="bg-white shadow-lg p-5">
+            <ul
+              class="divide-y divide-gray-300 rounded border border-gray-300 text-gray-900"
+              id="task-container"
+            ></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
