@@ -14,10 +14,15 @@
           <div class="bg-white shadow-lg p-5">
             <div class="flex flex-col space-x-10">
               <form method="post" id="form" autocomplete="off">
-                <input-element label="Tarea" name="name"></input-element>
+                <input-element
+                  label="Tarea"
+                  name="name"
+                  required
+                ></input-element>
                 <textarea-element
                   label="Descripción"
                   name="content"
+                  required
                 ></textarea-element>
                 <button
                   type="submit"
@@ -30,7 +35,7 @@
           </div>
           <div class="bg-white shadow-lg p-5">
             <ul
-              class="divide-y divide-gray-300 rounded border border-gray-300 text-gray-900"
+              class="divide-y rounded border border-gray-300 text-gray-900"
               id="task-container"
             ></ul>
           </div>

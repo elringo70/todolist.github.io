@@ -9,6 +9,7 @@ class Textarea extends HTMLElement {
     this.cols = this.getAttribute("cols") || "";
     this.rows = this.getAttribute("rows") || "8";
     this.disabled = this.hasAttribute("disabled");
+    this.required = this.hasAttribute("required");
     this.render();
   }
 
@@ -42,6 +43,7 @@ class Textarea extends HTMLElement {
             ${this.disabled ? "cursor-default disabled:bg-gray-200" : ""}
           `}"
           ${this.disabled ? "disabled" : ""}
+          ${this.required ? "required" : ""}
         ></textarea>
       </div>
     `;

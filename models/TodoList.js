@@ -27,6 +27,7 @@ class TodoList {
     };
 
     this.#_taskList.push(formObject);
+    this.#update();
   }
 
   get taskList() {
@@ -35,6 +36,13 @@ class TodoList {
 
   #update() {
     window.localStorage.setItem("task-list", JSON.stringify(this.taskList));
+  }
+
+  deleteTask(position) {
+    this.#_taskList = this.#_taskList.filter(
+      (element, index) => index !== position
+    );
+    this.#update();
   }
 }
 

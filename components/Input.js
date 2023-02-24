@@ -7,6 +7,7 @@ class Input extends HTMLElement {
     this.label = this.getAttribute("label") || null;
     this.name = this.getAttribute("name");
     this.type = "text" || this.getAttribute("type");
+    this.required = this.hasAttribute("required");
     this.disabled = this.hasAttribute("disabled");
     this.render();
   }
@@ -33,6 +34,7 @@ class Input extends HTMLElement {
           ${this.disabled ? "disabled" : ""}
           type="${this.type}"
           name="${this.name}"
+          ${this.required ? "required" : ""}
         />
       </div>
     `;
