@@ -16,7 +16,7 @@ class UI {
 
   #emptyElementsArray() {
     this.taskContainer.innerHTML = /*html*/ `
-      <li class="${`flex w-full flex-row items-center justify-between py-2 px-4 bg-gray-100 italic text-gray-400`}"
+      <li class="${`flex w-full flex-row items-center justify-between py-2 px-4 bg-gray-100 italic text-gray-400 cursor-default`}"
       >...sin tareas</li>
     `;
   }
@@ -42,6 +42,13 @@ class UI {
       }
       this.#emptyElementsArray();
     }
+  }
+
+  activeElement(position) {
+    for (let i = 0; i < this.taskContainer.childNodes.length; i++) {
+      this.taskContainer.childNodes[i].removeAttribute("active");
+    }
+    this.taskContainer.childNodes[position].setAttribute("active", "");
   }
 
   deleteTask(position) {

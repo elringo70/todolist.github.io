@@ -11,14 +11,31 @@ form.addEventListener("submit", function (e) {
 });
 
 ui.taskContainer.addEventListener("click", function (e) {
+  const elements = [...this.getElementsByTagName("todo-element")];
+
   switch (e.target.tagName) {
     case "BUTTON":
-      const elements = [...this.getElementsByTagName("todo-element")];
       elements.forEach((element, index) => {
         const position = parseInt(element.dataset.position, 10);
         if (position === index) {
-          ui.deleteTask(position);
+          Swal.fire({
+            icon: "warning",
+            title: "¿Desea eliminar la tarea?",
+            showCancelButton: true,
+            confirmButtonText: "Eliminar",
+            denyButtonText: `Cancelar`,
+            confirmButtonColor: "#d33",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              ui.deleteTask(position);
+            }
+          });
         }
+      });
+      break;
+    case "LI":
+      elements.forEach((element, index) => {
+        console.log(e.target.dataset.position);
       });
       break;
   }

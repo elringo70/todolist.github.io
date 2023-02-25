@@ -5,15 +5,24 @@ class TodoElement extends HTMLElement {
 
   connectedCallback() {
     this.name = this.getAttribute("name");
-    this.active = this.hasAttribute("active");
     this.render();
+    this.addEventListener("click", function (e) {
+      console.log(e.target);
+    });
+  }
+
+  static get observedAttributes() {
+    return ["active"];
+  }
+
+  attributeChangedCallback(name, old, now) {
+    if (this.hasAttribute("active")) {
+    }
   }
 
   render() {
     this.innerHTML = /*html*/ `
-      <li class="${`flex w-full flex-row items-center justify-between py-2 px-4 hover:bg-gray-200
-        ${this.active ? "bg-blue-500 text-white" : ""}
-        `}"
+      <li class="${`flex w-full flex-row items-center justify-between py-2 px-4 hover:bg-gray-200`}"
       >
         <div>${this.name}</div>
         <div>

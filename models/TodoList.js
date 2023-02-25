@@ -3,6 +3,7 @@ class Task {
     this.name = "";
     this.content = "";
     this.completed = false;
+    this.active = false;
   }
 }
 
@@ -21,13 +22,14 @@ class TodoList {
     const formData = new FormData(object);
 
     const formObject = {
-      name: formData.get("name"),
-      content: formData.get("content"),
+      name: formData.get("name").trim(),
+      content: formData.get("content").trim(),
       completed: false,
+      active: false,
     };
 
     this.#_taskList.push(formObject);
-    this.#update();
+    //this.#update();
   }
 
   get taskList() {
