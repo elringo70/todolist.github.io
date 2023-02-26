@@ -1,7 +1,7 @@
 import { TodoList } from "./TodoList.js";
 const todoList = new TodoList();
 
-class UI {
+export class UI {
   constructor() {
     this.taskContainer = document.getElementById("task-container");
     this.#render();
@@ -24,22 +24,26 @@ class UI {
   #render() {
     const taskList = todoList.taskList;
 
-    while (this.taskContainer.hasChildNodes()) {
-      this.taskContainer.removeChild(this.taskContainer.lastChild);
-    }
+    this.taskContainer.innerHTML = "";
 
     if (taskList.length > 0) {
       for (const [index, task] of taskList.entries()) {
         const todo = document.createElement("todo-element");
         todo.setAttribute("name", task.name);
         todo.setAttribute("data-position", index);
+
+        if (taskList.length === 1) {
+          todo.setAttribute("active", "");
+          todoList.selectTask(0);
+        } else {
+          task.active ? todo.setAttribute("active", "") : "";
+        }
+
         task.completed ? todo.setAttribute("completed", "") : "";
         this.taskContainer.appendChild(todo);
       }
     } else {
-      while (this.taskContainer.hasChildNodes()) {
-        this.taskContainer.removeChild(this.taskContainer.lastChild);
-      }
+      this.taskContainer.innerHTML = "";
       this.#emptyElementsArray();
     }
   }
@@ -49,12 +53,15 @@ class UI {
       this.taskContainer.childNodes[i].removeAttribute("active");
     }
     this.taskContainer.childNodes[position].setAttribute("active", "");
+    todoList.selectTask(position);
   }
 
   deleteTask(position) {
     todoList.deleteTask(position);
     this.#render();
   }
-}
 
-export { UI };
+  getTaskDescription(position) {
+    return todoList.getTodoDescription(position);
+  }
+}

@@ -11,6 +11,8 @@ form.addEventListener("submit", function (e) {
 });
 
 ui.taskContainer.addEventListener("click", function (e) {
+  //const elements = this.childNodes;
+
   const elements = [...this.getElementsByTagName("todo-element")];
 
   switch (e.target.tagName) {
@@ -34,9 +36,74 @@ ui.taskContainer.addEventListener("click", function (e) {
       });
       break;
     case "LI":
-      elements.forEach((element, index) => {
-        console.log(e.target.dataset.position);
-      });
+      if (elements.length > 0) {
+        elements.forEach((element) => {
+          const position = parseInt(element.dataset.position, 10);
+          const target = parseInt(e.srcElement.parentElement.dataset.position);
+          if (position === target) {
+            ui.activeElement(position);
+          }
+        });
+      }
+      break;
+    case "INPUT":
+      if (elements.length > 0) {
+        elements.forEach((element) => {
+          const position = parseInt(element.dataset.position, 10);
+          const target = element.closest("todo-element");
+
+          if (position === parseInt(target.dataset.position, 10)) {
+            const task = ui.getTaskDescription(position);
+            ui.activeElement(position);
+            Swal.fire({
+              html: /*html*/ `
+                <h1 class="text-grey-darkest text-4xl">${task.name}</h1>
+                <div class="flex border border-gray-300 p-3 rounded cursor-default mt-4">
+                  <p class="text-grey-darkest text-justify">${task.content}</p>
+                </div>
+              `,
+              confirmButtonText: "Completar",
+              showCancelButton: true,
+              cancelButtonText: "Cancelar",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                console.log("confirmado");
+              }
+            });
+          }
+        });
+      }
+      break;
+  }
+});
+
+ui.taskContainer.addEventListener("dblclick", function (e) {
+  const elements = this.childNodes;
+
+  switch (e.target.tagName) {
+    case "LI":
+      const lis = this.getElementsByTagName("todo-element");
+
+      if (lis.length > 0) {
+        elements.forEach((element, index) => {
+          const position = parseInt(element.dataset.position, 10);
+          const target = parseInt(e.srcElement.parentElement.dataset.position);
+
+          if (position === target) {
+            const task = ui.getTaskDescription(position);
+            Swal.fire({
+              html: /*html*/ `
+                <h1 class="text-grey-darkest text-4xl">${task.name}</h1>
+                <div class="flex border border-gray-300 p-3 rounded cursor-default mt-4">
+                  <p class="text-grey-darkest text-justify">${task.content}</p>
+                </div>
+              `,
+              showConfirmButton: true,
+            });
+            //ui.getTaskDescription(position);
+          }
+        });
+      }
       break;
   }
 });

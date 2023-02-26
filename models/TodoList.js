@@ -29,7 +29,7 @@ class TodoList {
     };
 
     this.#_taskList.push(formObject);
-    //this.#update();
+    this.#update();
   }
 
   get taskList() {
@@ -37,7 +37,15 @@ class TodoList {
   }
 
   #update() {
-    window.localStorage.setItem("task-list", JSON.stringify(this.taskList));
+    window.localStorage.setItem("task-list", JSON.stringify(this.#_taskList));
+  }
+
+  selectTask(position) {
+    this.#_taskList.forEach((task) => {
+      task.active = false;
+    });
+    this.#_taskList[position].active = true;
+    this.#update();
   }
 
   deleteTask(position) {
@@ -45,6 +53,10 @@ class TodoList {
       (element, index) => index !== position
     );
     this.#update();
+  }
+
+  getTodoDescription(position) {
+    return this.#_taskList[position];
   }
 }
 
