@@ -64,4 +64,8 @@ export class UI {
   getTaskDescription(position) {
     return todoList.getTodoDescription(position);
   }
+
+  completeTask(position) {
+    todoList.completeTodo(position);
+  }
 }

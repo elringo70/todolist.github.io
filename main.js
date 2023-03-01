@@ -50,26 +50,35 @@ ui.taskContainer.addEventListener("click", function (e) {
       if (elements.length > 0) {
         elements.forEach((element) => {
           const position = parseInt(element.dataset.position, 10);
-          const target = element.closest("todo-element");
+          const target = e.target;
 
-          if (position === parseInt(target.dataset.position, 10)) {
+          if (
+            position ===
+            parseInt(target.closest("todo-element").dataset.position, 10)
+          ) {
             const task = ui.getTaskDescription(position);
+
             ui.activeElement(position);
-            Swal.fire({
-              html: /*html*/ `
-                <h1 class="text-grey-darkest text-4xl">${task.name}</h1>
-                <div class="flex border border-gray-300 p-3 rounded cursor-default mt-4">
-                  <p class="text-grey-darkest text-justify">${task.content}</p>
-                </div>
-              `,
-              confirmButtonText: "Completar",
-              showCancelButton: true,
-              cancelButtonText: "Cancelar",
-            }).then((result) => {
-              if (result.isConfirmed) {
-                console.log("confirmado");
-              }
-            });
+
+            if (target.checked) {
+              Swal.fire({
+                icon: "warning",
+                title: "¿Completar la tarea?",
+                html: /*html*/ `
+                  <h1 class="text-grey-darkest text-3xl">${task.name}</h1>
+                  <div class="flex border-t p-3 cursor-default mt-4">
+                    <p class="text-grey-darkest text-justify">${task.content}</p>
+                  </div>
+                `,
+                confirmButtonText: "Completar",
+                showCancelButton: true,
+                cancelButtonText: "Cancelar",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  ui.completeTask(position);
+                }
+              });
+            }
           }
         });
       }

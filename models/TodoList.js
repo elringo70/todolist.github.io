@@ -58,6 +58,11 @@ class TodoList {
   getTodoDescription(position) {
     return this.#_taskList[position];
   }
+
+  completeTodo(position) {
+    this.#_taskList[position].completed = true;
+    console.log(this.#_taskList);
+  }
 }
 
 export { Task, TodoList };
