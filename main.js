@@ -76,6 +76,8 @@ ui.taskContainer.addEventListener("click", function (e) {
               }).then((result) => {
                 if (result.isConfirmed) {
                   ui.completeTask(position);
+                } else {
+                  target.checked = false;
                 }
               });
             }
