@@ -105,7 +105,7 @@ ui.taskContainer.addEventListener("dblclick", function (e) {
             Swal.fire({
               html: /*html*/ `
                 <h1 class="text-grey-darkest text-4xl">${task.name}</h1>
-                <div class="flex border border-gray-300 p-3 rounded cursor-default mt-4">
+                <div class="flex border-t p-3 rounded cursor-default mt-4">
                   <p class="text-grey-darkest text-justify">${task.content}</p>
                 </div>
               `,

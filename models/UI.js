@@ -67,5 +67,6 @@ export class UI {
 
   completeTask(position) {
     todoList.completeTodo(position);
+    this.#render();
   }
 }

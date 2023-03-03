@@ -61,7 +61,6 @@ class TodoList {
 
   completeTodo(position) {
     this.#_taskList[position].completed = true;
-    console.log(this.#_taskList);
   }
 }
 

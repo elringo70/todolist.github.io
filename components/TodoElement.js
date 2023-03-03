@@ -15,20 +15,21 @@ class TodoElement extends HTMLElement {
   }
 
   attributeChangedCallback(name, old, now) {
-    const selectClass = ["bg-blue-500", "text-white"];
+    const selectedClass = ["bg-blue-500", "text-white"];
+    const completedTaskClass = ["bg-gray-200", "text-gray-500"];
 
     if (this.hasAttribute("active")) {
       if (!this.completed) {
         this.childNodes.forEach((child) => {
           if (child.tagName === "LI") {
-            child.classList.add(...selectClass);
+            child.classList.add(...selectedClass);
           }
         });
       }
     } else {
       this.childNodes.forEach((child) => {
         if (child.tagName === "LI") {
-          child.classList.remove(...selectClass);
+          child.classList.remove(...selectedClass);
         }
       });
     }
