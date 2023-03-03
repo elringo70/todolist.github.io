@@ -1,6 +1,6 @@
 # TodoList app
 
-Todo app with local storage implementacion, oriented object programming and Tailwind CSS.
+Todo app with local storage implementacion, oriented object programming, Tailwind CSS and Vanilla JS Web Components.
 
 ## Javascript
 
